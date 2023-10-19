@@ -118,6 +118,7 @@ class _SidebarXState extends State<SidebarX>
           margin: t.margin,
           decoration: t.decoration,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               widget.headerBuilder?.call(context, widget.controller.extended) ??
                   const SizedBox(),
@@ -140,37 +141,40 @@ class _SidebarXState extends State<SidebarX>
                   },
                 ),
               ),
-              const Spacer(),
-              if (widget.footerItems.isNotEmpty)
-                Flexible(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemCount: widget.footerItems.length,
-                    separatorBuilder: widget.separatorBuilder ??
-                            (_, __) => const SizedBox(height: 8),
-                    itemBuilder: (context, index) {
-                      final item = widget.footerItems.reversed.toList()[index];
-                      return SidebarXCell(
-                        item: item,
-                        theme: t,
-                        animationController: _animationController!,
-                        extended: widget.controller.extended,
-                        selected: widget.controller.selectedIndex ==
-                            widget.items.length +
-                                widget.footerItems.length -
-                                index -
-                                1,
-                        onTap: () => _onFooterItemSelected(item, index),
-                      );
-                    },
-                  )
-                ),
-              widget.footerDivider ?? const SizedBox(),
-              widget.footerBuilder?.call(context, widget.controller.extended) ??
-                  const SizedBox(),
-              if (widget.showToggleButton)
-                _buildToggleButton(t, widget.collapseIcon, widget.extendIcon),
+              Column(
+                children: [
+                  if (widget.footerItems.isNotEmpty)
+                    Flexible(
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          reverse: true,
+                          itemCount: widget.footerItems.length,
+                          separatorBuilder: widget.separatorBuilder ??
+                                  (_, __) => const SizedBox(height: 8),
+                          itemBuilder: (context, index) {
+                            final item = widget.footerItems.reversed.toList()[index];
+                            return SidebarXCell(
+                              item: item,
+                              theme: t,
+                              animationController: _animationController!,
+                              extended: widget.controller.extended,
+                              selected: widget.controller.selectedIndex ==
+                                  widget.items.length +
+                                      widget.footerItems.length -
+                                      index -
+                                      1,
+                              onTap: () => _onFooterItemSelected(item, index),
+                            );
+                          },
+                        )
+                    ),
+                  widget.footerDivider ?? const SizedBox(),
+                  widget.footerBuilder?.call(context, widget.controller.extended) ??
+                      const SizedBox(),
+                  if (widget.showToggleButton)
+                    _buildToggleButton(t, widget.collapseIcon, widget.extendIcon),
+                ],
+              )
             ],
           ),
         );
