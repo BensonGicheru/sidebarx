@@ -164,7 +164,7 @@ class _SidebarXState extends State<SidebarX>
                           onTap: () => _onFooterItemSelected(item, index),
                         );
                       },
-                    ),,
+                    ),
                   )
                 ),
               widget.footerDivider ?? const SizedBox(),
