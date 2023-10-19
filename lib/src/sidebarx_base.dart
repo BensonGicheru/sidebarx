@@ -118,7 +118,6 @@ class _SidebarXState extends State<SidebarX>
           margin: t.margin,
           decoration: t.decoration,
           child: Column(
-            mainAxisAlignment: ,
             children: [
               widget.headerBuilder?.call(context, widget.controller.extended) ??
                   const SizedBox(),
