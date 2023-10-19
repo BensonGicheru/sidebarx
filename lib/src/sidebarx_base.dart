@@ -140,6 +140,7 @@ class _SidebarXState extends State<SidebarX>
                   },
                 ),
               ),
+              const Spacer(),
               if (widget.footerItems.isNotEmpty)
                 Flexible(
                   child: ListView.separated(
